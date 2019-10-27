@@ -81,6 +81,7 @@ int main(int argc, char **argv)
         params[targetBodyExtension].push_back(".cpp");
         params[targetBodyExtension].push_back(".c++");
         params[targetBodyExtension].push_back(".cxx");
+        params[targetBodyExtension].push_back(".ino");
     }
 
     for(size_t i = args.size() - 1; i > 0; --i)//vérifier si c'est >0 ou >1
