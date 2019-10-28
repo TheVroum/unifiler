@@ -34,6 +34,26 @@ bool compareExt(string toCheck, vector <string> toFind)
 }
 
 
+
+
+void removeIncludes(string &s)
+{
+    QString treatment = QString::fromStdString(s);
+    QStringList split = treatment.split('\n');
+    QStringList recreated;
+    for(auto a : split)
+        if(a.left(QString("#include \"").size())
+            != QString("#include \""))
+            recreated.push_back(a);
+    s = recreated.join("\n").toStdString();
+    return;
+}
+
+
+
+
+
+
 int main(int argc, char **argv)
 {
     const size_t paramTypeNumber = 2;
@@ -111,6 +131,7 @@ int main(int argc, char **argv)
         }
     }
     outputFileHeaders += outputFileBody;
+    removeIncludes(outputFileHeaders);
     ofstream ofs(outFileName);
     ofs.write(outputFileHeaders.c_str(), outputFileHeaders.size());
     ofs.close();
